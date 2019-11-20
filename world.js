@@ -12,16 +12,16 @@ window.onload = function()
     , false);
     
     
-    function getInfo(s) {
-        var xhttp = new XMLHttpRequest();
+    function getInfo(s, all) {
+        var request = new XMLHttpRequest();
         
-        xhttp.onreadystatechange = function() {
+        request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200)
                 document.getElementById("result").innerHTML = this.responseText;
         }
-            var querystring = "world.php?country=" + s;
-            xhttp.open("GET", querystring , true);
-            xhttp.send();
+            var querystring = "world.php?country=" + s + "&all=" + all;
+            request.open("GET", querystring , true);
+            request.send();
         
     };
 
