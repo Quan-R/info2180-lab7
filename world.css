@@ -34,6 +34,12 @@ body{
 	font-size: 15px;
 	font-family: 'Oswald', sans-serif;
 }
+#cities{
+	background-color: #228B22;
+	border-color: #228B22;
+	font-size: 15px;
+	font-family: 'Oswald', sans-serif;
+}
 #label{
 	font-size: 15px;
 	font-family: 'Oswald', sans-serif;

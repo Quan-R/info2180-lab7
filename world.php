@@ -24,13 +24,12 @@
 </style>
 <?php
 $country = $_GET['country'];
-$country = filter_var(htmlentities($country), FILTER_SANITIZE_STRING);
+$country = filter_var(htmlentities($country));
 
 
 $host = getenv('IP');
 $username = 'lab7_user';
 $password = '';
-$password = 'Ricketts12';
 $dbname = 'world';
 
 try {
@@ -62,6 +61,7 @@ if($country == ""){
         <td>'.$row['head_of_state'].'</td></tr>';
     }
 }
+
 else{
     foreach ($results2 as $row){ 
         echo '<tr><td>'.$row['name']. '</td>
