@@ -12,14 +12,14 @@ window.onload = function()
     , false);
     
     
-    function getInfo(s, all) {
+    function getInfo(s) {
         var request = new XMLHttpRequest();
         
         request.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200)
                 document.getElementById("result").innerHTML = this.responseText;
         }
-            var querystring = "world.php?country=" + s + "&all=" + all;
+            var querystring = "world.php?country=" + s;
             request.open("GET", querystring , true);
             request.send();
         

@@ -1,52 +1,73 @@
+<style>
+#countries {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#countries td, #countries th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#countries tr:nth-child(even){background-color: #f2f0f0;}
+
+#countries tr:hover {background-color: #f5f5f5;}
+
+#countries th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #008000;
+  color: white;
+}
+</style>
 <?php
 $country = $_GET['country'];
 $country = filter_var(htmlentities($country), FILTER_SANITIZE_STRING);
 
-$all = $_GET['all'];
-$all = filter_var($all, FILTER_VALIDATE_BOOLEAN);
 
 $host = getenv('IP');
 $username = 'lab7_user';
+$password = '';
 $password = 'Ricketts12';
 $dbname = 'world';
 
-$conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-
-
-if($all == true){
-    $stmt = $conn->query("SELECT * FROM countries");
-}else if($all == false){
-    $stmt = $conn->query("SELECT * FROM countries where name like '%$country%'");
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+} catch(Exception $e) {
+    die($e->getMessages());
 }
-$sql = "SELECT name, continent, independence_year, head_of_state FROM countries";
-$result = $conn->query($sql);
 
-echo "<table border='1'>
-    <tr>
-    <th>  Name  </th>
-    <th>  Continent  </th>
-    <th>  Independence  </th>
-    <th>  Head of State  </th>
-    </tr>";
+$stmt = $conn->query("SELECT * FROM countries");
+$stmt2 = $conn->query("SELECT * FROM countries where name like '%$country%'");
+
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$results2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+echo '<table id="countries">
+<tr id="heading">
+    <th>'."Name".'</th>
+    <th>'."Continent".'</th>
+    <th>'."Independence Year".'</th>
+    <th>'."Head of State".'</th></tr>';
 
 
-if (trim($country) == "" and $all == false){
-    if ($result -> fetchColumn() > 0){
-        foreach($result as $row){ 
-           echo "<tr>";
-           echo "<td>". $row["name"] . "</td>";
-           echo "<td>". $row["continent"] . "</td>";
-           echo "<td>". $row["independence_year"] . "</td> " ;
-           echo "<td>". $row["head_of_state"] . "</td>";
-           echo "</tr>";
-        }
-        echo "</table>";
+if($country == ""){
+    foreach ($results as $row){ 
+        echo '<tr>
+        <td>'.$row['name']. '</td>
+        <td>'.$row['continent'] .'</td>
+        <td>'.$row['independence_year']. '</td>
+        <td>'.$row['head_of_state'].'</td></tr>';
     }
-    //$conn -> close();
-    //foreach (O as $row){
-       // echo '<td>', $row['name'], '</td>
-    //   //     <td>', $row['head_of_state'], '</td>';
-    //}
 }
-
-//echo '</tr></table>';
+else{
+    foreach ($results2 as $row){ 
+        echo '<tr><td>'.$row['name']. '</td>
+        <td>'.$row['continent'] .'</td>
+        <td>'.$row['independence_year']. '</td>
+        <td>'.$row['head_of_state'].'</td></tr></br>';
+    }
+}
+echo '</table>';

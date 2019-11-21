@@ -16,7 +16,7 @@ body{
 	height: 100px;
 	font-weight: bold;
 	text-align: center;
-	background: #C71585;
+	background: #006400;
 	color: #fff;
 	border-color: #006400;
 	border-width:3px ;
@@ -29,8 +29,8 @@ body{
 	text-shadow: 3px 4px rgba(0, 0, 0, 0.1);
 }
 #lookup{
-	background-color: #EE82EE;
-	border-color: #EE82EE;
+	background-color: #228B22;
+	border-color: #228B22;
 	font-size: 15px;
 	font-family: 'Oswald', sans-serif;
 }
@@ -42,7 +42,7 @@ body{
 #country{
 	font-family:'Oswald', sans-serif;
 	font-size: 15px;
-	border-color: #EE82EE;
+	border-color: #228B22;
 	padding-bottom: 4.5px;
 	padding-top: 4.5px;
 	
